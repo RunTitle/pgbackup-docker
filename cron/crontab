@@ -1,0 +1,2 @@
+0 1 * * * /cron/dump.sh
+0 3 * * * /cron/sync.sh
