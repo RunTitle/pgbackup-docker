@@ -19,6 +19,8 @@ RUN pip install -e hg+https://bitbucket.org/dbenamy/devcron#egg=devcron
 # Setup defaults
 ADD ./cron /cron
 
-VOLUME /cron
+RUN mkdir /data
+
+VOLUME ['/cron','/data']
 
 CMD ["devcron.py", "/cron/crontab"]

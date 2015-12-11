@@ -8,6 +8,6 @@ echo "$PGHOST:$PGPORT:$PGDATABASE:$PGUSER:$PGPASS" > /root/.pgpass
 
 chmod 600 /root/.pgpass
 
-pg_dump -U "$PGUSER" -h "$PGHOST" -w -c -Fp --compress 4 "$PGDATABASE" > "/dump/$PREFIX_$PGDATABASE.sql.gz"
+pg_dump -U "$PGUSER" -h "$PGHOST" -w -c -Fp --compress 4 "$PGDATABASE" > "/dump/$PGDATABASE.sql.gz"
 
 echo "Job finished: $(date)"
