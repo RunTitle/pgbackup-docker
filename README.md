@@ -3,6 +3,7 @@ postgres backup and s3 sync docker image
 
 Requires the following environment variables.
 
+AWS_OWNER
 AWS_SECRET_KEY
 AWS_ACCESS_KEY
 S3_BUCKET = location for backup file

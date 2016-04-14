@@ -13,8 +13,8 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' $PG_MAJ
 RUN apt-get update \
     && apt-get install -y postgresql-client-$PG_MAJOR mercurial
 
-# Yay devcron
-RUN pip install -e hg+https://bitbucket.org/dbenamy/devcron#egg=devcron
+ADD requirements.txt /opt/app/requirements.txt
+RUN pip install -r /opt/app/requirements.txt
 
 # Setup defaults
 ADD ./cron /cron

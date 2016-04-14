@@ -1,2 +1,3 @@
 0 1 * * * /cron/dump.sh
 0 3 * * * /cron/sync.sh
+0 4 * * * /cron/update_clusters.py
