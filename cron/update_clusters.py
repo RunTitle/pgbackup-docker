@@ -12,8 +12,8 @@ def update_queue():
         aws_access_key_id=os.getenv('AWS_ACCESS_KEY'),
         aws_secret_access_key=os.getenv('AWS_SECRET_KEY'),
         application='titletime',
-        subscriptions=[],
-        publications=[]
+        subscriptions=['generate_clusters'],
+        publications=['generate_clusters']
     )
     message = {'task': 'update_queue'}
     queue_manager.publish_message(name=update_queue, raw_message=message)
