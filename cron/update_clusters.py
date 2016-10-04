@@ -5,7 +5,7 @@ from queued.manager import QueuedManager
 
 
 def update_queue():
-    update_queues = ['generate_clusters', 'calculate_daily_metrics']
+    update_queues = ['generate_clusters']
     queue_manager = QueuedManager(
         config={'env': os.getenv('ENVIRONMENT', 'development')},
         aws_owner=os.getenv('AWS_OWNER'),
