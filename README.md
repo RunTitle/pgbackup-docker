@@ -1,11 +1,13 @@
 # pgbackup-docker
-postgres backup and s3 sync docker image
+General Cron Jobs, originally for postgres backups.
 
 Requires the following environment variables.
 
 AWS_OWNER
 AWS_SECRET_KEY
 AWS_ACCESS_KEY
+AWS_REGION
+ENVIRONMENT
 S3_BUCKET = location for backup file
 PGDATABASE = postgres db being backed up
 PGHOST = postgres host
