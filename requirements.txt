@@ -2,4 +2,4 @@ s3cmd==1.6.1
 boto3==1.3.0
 -e hg+https://bitbucket.org/dbenamy/devcron#egg=devcron
 -e git+https://github.com/RunTitle/py-queued.git@3955e22c53bd403f2e85db4c9e3a17fd80848a00#egg=Queued-master
-automated-ebs-snapshots==1.4.1
+automated-ebs-snapshots==0.4.1
