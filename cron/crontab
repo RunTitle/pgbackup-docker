@@ -1,4 +1,6 @@
 0 1 * * * /cron/dump.sh
 0 3 * * * /cron/sync.sh
 0 4 * * * /cron/update_clusters.py
-5 * * * * /cron/ebs_backup.sh
+0 6 * * * /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f daily 7
+0 7 * * 0 /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f weekly 4
+0 8 1 * * /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f monthly 2
