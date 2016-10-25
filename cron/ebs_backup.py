@@ -6,6 +6,7 @@ import logging
 import os
 
 from dateutil.relativedelta import relativedelta
+logging.basicConfig(level=logging.INFO)
 
 
 class VolumeBackups(object):
@@ -16,10 +17,8 @@ class VolumeBackups(object):
         self.aws_secret_key = aws_secret_key
         self.aws_access_key = aws_access_key
         self.ec2_region = ec2_region
-        self.configuration = {}
         self.now = datetime.datetime.now()
 
-        logging.basicConfig(level=logging.INFO)
         session = boto3.session.Session(
             aws_access_key_id=self.aws_access_key,
             aws_secret_access_key=self.aws_secret_key,
@@ -50,10 +49,17 @@ class VolumeBackups(object):
                 if tag['Key'] == 'period' and tag['Value'] == self.period:
                     same_period = True
                 if tag['Key'] == 'date':
-                    snapshot_date = datetime.datetime.strptime(tag['Value'], '%Y-%m-%d %H:%M')
+                    try:
+                        snapshot_date = datetime.datetime.strptime(tag['Value'], '%Y-%m-%d %H:%M')
+                    except ValueError:
+                        pass
 
             if snapshot_date and same_period and snapshot_date < drop_date:
-                logging.info('Deleting snapshot')
+                logging.info(
+                    'Delete snapshot {} date {:%Y-%m-%d %H:%M} exceeds {} retention of {}.'.format(
+                        snapshot.id, snapshot_date, self.period, self.retention
+                    )
+                )
                 snapshot.delete()
                 self.delete_count += 1
 
