@@ -1,5 +1,7 @@
 0 1 * * * /cron/dump.sh
-0 3 * * * /cron/sync.sh
+0 2 * * * /cron/mongo_dump.sh titletime
+0 3 * * * /cron/mongo_dump.sh wildcat
+0 4 * * * /cron/mongo_dump.sh taxroll
 0 4 * * * /cron/update_clusters.py
 
 # Backup volumes every day retaining last seven days of backups
