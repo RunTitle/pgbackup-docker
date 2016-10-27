@@ -96,19 +96,19 @@ class VolumeBackups(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Backup EBS Volumes')
     parser.add_argument(
-        'volume_ids', type=str, help='Comma seperated list of volume_ids to backup'
-    )
-    parser.add_argument(
         'period', type=str, help='Time period.', choices=['days', 'weeks', 'months']
     )
-    parser.add_argument('retention', type=int, help='Number of periods to retain')
     args = parser.parse_args()
-    vol_backups = VolumeBackups(
-        volume_ids=args.volume_ids,
-        period=args.period,
-        retention=args.retention,
-        aws_access_key=os.getenv('AWS_ACCESS_KEY'),
-        aws_secret_key=os.getenv('AWS_SECRET_KEY'),
-        ec2_region=os.getenv('AWS_REGION')
-    )
-    vol_backups.process()
+
+    retention_key = '{}_RETENTION'.format(args.period.upper())
+    volume_ids = os.getenv('BACKUP_VOLUMES')
+    if volume_ids:
+        vol_backups = VolumeBackups(
+            volume_ids=volume_ids,
+            period=args.period,
+            retention=os.getenv(retention_key, 1),
+            aws_access_key=os.getenv('AWS_ACCESS_KEY'),
+            aws_secret_key=os.getenv('AWS_SECRET_KEY'),
+            ec2_region=os.getenv('AWS_REGION')
+        )
+        vol_backups.process()

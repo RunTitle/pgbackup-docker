@@ -1,14 +1,19 @@
+# Dump and copy postgres database
 0 1 * * * /cron/dump.sh
+
+# Dump and copy mongo databases
 0 2 * * * /cron/mongo_dump.sh titletime
 0 3 * * * /cron/mongo_dump.sh wildcat
 0 4 * * * /cron/mongo_dump.sh taxroll
+
+# Send messages to SQS
 0 4 * * * /cron/update_clusters.py
 
-# Backup volumes every day retaining last seven days of backups
-0 6 * * * /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f daily 7
+# Daily volume backup
+0 6 * * * /cron/ebs_backup.py daily
 
-# Backup volumes every Sunday retaining last four weeks of backups
-0 7 * * 0 /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f weekly 4
+# Weekly volume backup
+0 7 * * 0 /cron/ebs_backup.py weekly
 
-# Backup volumes on the first of every month retaining last two months of backups
-0 8 1 * * /cron/ebs_backup.py vol-9316b470,vol-2c16b4cf,vol-8c16b46f monthly 2
+# Monthly volume backup
+0 8 1 * * /cron/ebs_backup.py monthly
